@@ -40,7 +40,7 @@ class WingboxFuelVol(ExplicitComponent):
         self.add_input('A_int', val=np.zeros((self.ny-1)), units='m**2')
         self.add_output('fuel_vols', val=np.zeros((self.ny-1)), units='m**3')
 
-        self.declare_partials('*', '*', method='cs')
+        #self.declare_partials('*', '*', method='cs')
 
     def compute(self, inputs, outputs):
         nodes = inputs['nodes']

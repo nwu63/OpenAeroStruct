@@ -42,7 +42,7 @@ class VonMisesTube(ExplicitComponent):
         self.G = surface['G']
 
         # TODO fix the sparsity declarations
-        self.declare_partials('*', '*')
+        #self.declare_partials('*', '*')
 
     def compute(self, inputs, outputs):
         self.T = np.zeros((3, 3),dtype=complex)

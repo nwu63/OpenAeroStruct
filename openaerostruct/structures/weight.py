@@ -38,12 +38,12 @@ class Weight(ExplicitComponent):
         self.add_output('structural_weight', val=0., units='N')
         self.add_output('element_weights', val=np.zeros((self.ny-1)), units='N')
 
-        self.declare_partials('structural_weight', ['A','nodes','load_factor'])
+        #self.declare_partials('structural_weight', ['A','nodes','load_factor'])
 
 
-        self.declare_partials('element_weights', 'load_factor')
+        #self.declare_partials('element_weights', 'load_factor')
         row_col = np.arange(self.ny-1, dtype=int)
-        self.declare_partials('element_weights','A', rows=row_col, cols=row_col)
+        #self.declare_partials('element_weights','A', rows=row_col, cols=row_col)
         ny = self.ny
         dimensions = 3
         rows=np.empty((dimensions*2*(ny-1)))
@@ -51,7 +51,7 @@ class Weight(ExplicitComponent):
         for i in range (ny-1):
             rows[i*dimensions*2:(i+1)*dimensions*2] = i
             cols[i*dimensions*2:(i+1)*dimensions*2] = np.linspace(i*dimensions,i*dimensions+(dimensions*2-1),dimensions*2)
-        self.declare_partials('element_weights','nodes', rows=rows, cols=cols)
+        #self.declare_partials('element_weights','nodes', rows=rows, cols=cols)
 
         self.set_check_partial_options('*', method='cs', step=1e-40)
 

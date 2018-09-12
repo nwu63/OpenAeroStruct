@@ -54,21 +54,21 @@ class LiftCoeff2D(ExplicitComponent):
         # Outputs
         self.add_output('Cl', val=np.zeros((self.ny-1)))
 
-        self.declare_partials(of='Cl', wrt='widths')
-        self.declare_partials(of='Cl', wrt='v')
-        self.declare_partials(of='Cl', wrt='rho')
-        self.declare_partials(of='Cl', wrt='alpha')
+        #self.declare_partials(of='Cl', wrt='widths')
+        #self.declare_partials(of='Cl', wrt='v')
+        #self.declare_partials(of='Cl', wrt='rho')
+        #self.declare_partials(of='Cl', wrt='alpha')
         ### Added to declare Jacobian sparse
-        self.declare_partials(of='Cl', wrt='chords', rows=list(range(self.ny-1))*2, \
-                              cols=list(range(self.ny-1))+list(range(1,self.ny)))
+        #self.declare_partials(of='Cl', wrt='chords', rows=list(range(self.ny-1))*2, \
+                              #cols=list(range(self.ny-1))+list(range(1,self.ny)))
 
         tmp_l = []
         for i in range(self.ny-1):
             tmp_l = tmp_l + [i]*3
         tmp_l = tmp_l*(self.nx-1)
 
-        self.declare_partials(of='Cl', wrt='sec_forces', rows=tmp_l, \
-                              cols=list(range((self.ny-1)*(self.nx-1)*3)))
+        #self.declare_partials(of='Cl', wrt='sec_forces', rows=tmp_l, \
+                              #cols=list(range((self.ny-1)*(self.nx-1)*3)))
 
 
     def compute(self, inputs, outputs):

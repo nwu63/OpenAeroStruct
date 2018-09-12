@@ -53,7 +53,7 @@ class WaveDrag(ExplicitComponent):
         self.add_input('t_over_c', val=np.arange((ny-1)))
         self.add_output('CDw', val=0.)
 
-        self.declare_partials('CDw', '*')
+        #self.declare_partials('CDw', '*')
         self.set_check_partial_options(wrt='*', method='cs', step=1e-50)
 
     def compute(self, inputs, outputs):

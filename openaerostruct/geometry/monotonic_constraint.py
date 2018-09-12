@@ -53,7 +53,7 @@ class MonotonicConstraint(ExplicitComponent):
             else:
                 sparse_val[self.ny-1:] *= -1
 
-        self.declare_partials(self.con_name, self.var_name, rows=rows,cols=cols,val=sparse_val)
+        #self.declare_partials(self.con_name, self.var_name, rows=rows,cols=cols,val=sparse_val)
 
     def compute(self, inputs, outputs):
         # Compute the difference between adjacent variable values

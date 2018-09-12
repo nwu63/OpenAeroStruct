@@ -43,10 +43,10 @@ class FEM(ImplicitComponent):
         size = self.options['size']
         row_col = np.arange(size, dtype="int")
 
-        self.declare_partials('*', '*')
+        #self.declare_partials('*', '*')
 
         arange = np.arange(size)
-        self.declare_partials('disp_aug', 'forces', val=-1., rows=arange, cols=arange)
+        #self.declare_partials('disp_aug', 'forces', val=-1., rows=arange, cols=arange)
 
     def apply_nonlinear(self, inputs, outputs, residuals):
         """

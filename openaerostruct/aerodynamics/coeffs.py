@@ -42,14 +42,14 @@ class Coeffs(ExplicitComponent):
         self.add_output('CL1', val=0.)
         self.add_output('CDi', val=0.)
 
-        self.declare_partials('CL1', 'L')
-        self.declare_partials('CDi', 'D')
-        self.declare_partials('CL1', 'v')
-        self.declare_partials('CDi', 'v')
-        self.declare_partials('CL1', 'rho')
-        self.declare_partials('CDi', 'rho')
-        self.declare_partials('CL1', 'S_ref')
-        self.declare_partials('CDi', 'S_ref')
+        #self.declare_partials('CL1', 'L')
+        #self.declare_partials('CDi', 'D')
+        #self.declare_partials('CL1', 'v')
+        #self.declare_partials('CDi', 'v')
+        #self.declare_partials('CL1', 'rho')
+        #self.declare_partials('CDi', 'rho')
+        #self.declare_partials('CL1', 'S_ref')
+        #self.declare_partials('CDi', 'S_ref')
 
     def compute(self, inputs, outputs):
         S_ref = inputs['S_ref']

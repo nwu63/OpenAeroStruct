@@ -64,22 +64,22 @@ class DisplacementTransfer(ExplicitComponent):
         # Set up the rows and cols for `def_mesh` wrt `disp`
         rows = mesh_disp_indices.flatten()
         cols = np.einsum('i,jk->ijk', np.ones(self.nx), disp_indices[:, :3]).flatten()
-        self.declare_partials('def_mesh', 'disp', val=1., rows=rows, cols=cols)
+        #self.declare_partials('def_mesh', 'disp', val=1., rows=rows, cols=cols)
 
         # Set up the rows and cols for `def_mesh` wrt `nodes`
         rows = np.einsum('ijk,l->ijkl', mesh_disp_indices, np.ones(3, int)).flatten()
         cols = np.einsum('ik,jl->ijkl', np.ones((self.nx, 3), int), nodes_indices).flatten()
-        self.declare_partials('def_mesh', 'nodes', rows=rows, cols=cols)
+        #self.declare_partials('def_mesh', 'nodes', rows=rows, cols=cols)
 
         # Set up the rows and cols for `def_mesh` wrt `mesh`
         rows = np.einsum('ijk,l->ijkl', mesh_disp_indices, np.ones(3, int)).flatten()
         cols = np.einsum('ijl,k->ijkl', mesh_indices, np.ones(3, int)).flatten()
-        self.declare_partials('def_mesh', 'mesh', rows=rows, cols=cols)
+        #self.declare_partials('def_mesh', 'mesh', rows=rows, cols=cols)
 
         # Set up the rows and cols for `def_mesh` wrt `transformation_matrix`
         rows = np.einsum('ijl,k->ijkl', mesh_disp_indices, np.ones(3, int)).flatten()
         cols = np.einsum('jlk,i->ijkl', transform_indices, np.ones(self.nx, int)).flatten()
-        self.declare_partials('def_mesh', 'transformation_matrix', rows=rows, cols=cols)
+        #self.declare_partials('def_mesh', 'transformation_matrix', rows=rows, cols=cols)
 
     def compute(self, inputs, outputs):
         mesh = inputs['mesh']

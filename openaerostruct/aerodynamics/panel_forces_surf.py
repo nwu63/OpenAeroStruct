@@ -43,7 +43,7 @@ class PanelForcesSurf(ExplicitComponent):
 
             rows = np.arange((nx - 1) * (ny - 1) * 3)
             cols = arange[ind1:ind2]
-            self.declare_partials(out_name, 'panel_forces', val=1., rows=rows, cols=cols)
+            #self.declare_partials(out_name, 'panel_forces', val=1., rows=rows, cols=cols)
 
             ind1 += (nx - 1) * (ny - 1) * 3
 

@@ -32,8 +32,8 @@ class Equilibrium(ExplicitComponent):
         for surface in self.options['surfaces']:
             name = surface['name']
             self.add_input(name + '_structural_weight', val=1., units='N')
-            self.declare_partials('L_equals_W',name+'_structural_weight')
-            self.declare_partials('total_weight',name+'_structural_weight')
+            #self.declare_partials('L_equals_W',name+'_structural_weight')
+            #self.declare_partials('total_weight',name+'_structural_weight')
 
         self.add_input('fuelburn', val=123., units='kg')
         self.add_input('W0', val=1000., units='kg')
@@ -49,16 +49,16 @@ class Equilibrium(ExplicitComponent):
         self.add_output('total_weight', val=1., units='N')
 
         
-        self.declare_partials('L_equals_W','CL')
-        self.declare_partials('L_equals_W','S_ref_total')
-        self.declare_partials('L_equals_W','W0')
-        self.declare_partials('L_equals_W','fuelburn')
-        self.declare_partials('L_equals_W','load_factor')
-        self.declare_partials('L_equals_W','rho')
-        self.declare_partials('L_equals_W','v')
-        self.declare_partials('total_weight','W0')
-        self.declare_partials('total_weight','fuelburn')
-        self.declare_partials('total_weight','load_factor')
+        #self.declare_partials('L_equals_W','CL')
+        #self.declare_partials('L_equals_W','S_ref_total')
+        #self.declare_partials('L_equals_W','W0')
+        #self.declare_partials('L_equals_W','fuelburn')
+        #self.declare_partials('L_equals_W','load_factor')
+        #self.declare_partials('L_equals_W','rho')
+        #self.declare_partials('L_equals_W','v')
+        #self.declare_partials('total_weight','W0')
+        #self.declare_partials('total_weight','fuelburn')
+        #self.declare_partials('total_weight','load_factor')
 
     def compute(self, inputs, outputs):
 

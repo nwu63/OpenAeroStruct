@@ -233,10 +233,10 @@ class EvalVelMtx(ExplicitComponent):
 
             self.add_output(vel_mtx_name, shape=(num_eval_points, nx - 1, ny - 1, 3), units='1/m')
 
-            self.declare_partials(vel_mtx_name, vectors_name, rows=rows, cols=cols)
+            #self.declare_partials(vel_mtx_name, vectors_name, rows=rows, cols=cols)
 
             # It's worth the cs cost here because alpha is just a scalar
-            self.declare_partials(vel_mtx_name, 'alpha', method='cs')
+            #self.declare_partials(vel_mtx_name, 'alpha', method='cs')
 
             self.set_check_partial_options(wrt='*', method='cs')
 

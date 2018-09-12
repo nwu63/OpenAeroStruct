@@ -27,7 +27,7 @@ class SumAreas(ExplicitComponent):
 
         self.add_output('S_ref_total', val=0., units='m**2')
 
-        self.declare_partials('*', '*', val=1.)
+        #self.declare_partials('*', '*', val=1.)
 
     def compute(self, inputs, outputs):
         outputs['S_ref_total'] = 0.

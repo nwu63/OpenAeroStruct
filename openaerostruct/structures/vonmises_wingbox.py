@@ -57,7 +57,7 @@ class VonMisesWingbox(ExplicitComponent):
 
         self.tssf = top_skin_strength_factor = surface['strength_factor_for_upper_skin']
 
-        self.declare_partials('*', '*', method='cs')
+        #self.declare_partials('*', '*', method='cs')
 
     def compute(self, inputs, outputs):
         disp = inputs['disp']

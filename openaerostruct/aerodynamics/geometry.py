@@ -62,7 +62,7 @@ class VLMGeometry(ExplicitComponent):
         val[:size] = 0.75
         val[size:] = 0.25
 
-        self.declare_partials('b_pts', 'def_mesh', rows=rows, cols=cols, val=val)
+        #self.declare_partials('b_pts', 'def_mesh', rows=rows, cols=cols, val=val)
 
         size = (nx-1) * (ny-1) * 3
         base = np.arange(size)
@@ -73,7 +73,7 @@ class VLMGeometry(ExplicitComponent):
         val[:2*size] = 0.125
         val[2*size:] = 0.375
 
-        self.declare_partials('c_pts', 'def_mesh', rows=rows, cols=cols, val=val)
+        #self.declare_partials('c_pts', 'def_mesh', rows=rows, cols=cols, val=val)
 
         size = ny - 1
         base = np.arange(size)
@@ -81,13 +81,13 @@ class VLMGeometry(ExplicitComponent):
         col = np.tile(3*base, 6) + np.repeat(np.arange(6), len(base))
         cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
 
-        self.declare_partials('widths', 'def_mesh', rows=rows, cols=cols)
+        #self.declare_partials('widths', 'def_mesh', rows=rows, cols=cols)
 
         rows = np.tile(base, 8)
         col = np.tile(3*base, 4) + np.repeat([1, 2, 4, 5], len(base))
         cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
 
-        self.declare_partials('cos_sweep', 'def_mesh', rows=rows, cols=cols)
+        #self.declare_partials('cos_sweep', 'def_mesh', rows=rows, cols=cols)
 
         size = ny
         base = np.arange(size)
@@ -95,13 +95,13 @@ class VLMGeometry(ExplicitComponent):
         col = np.tile(3*base, 3) + np.repeat(np.arange(3), len(base))
         cols = np.tile(col, nx) + np.repeat(3*ny*np.arange(nx), len(col))
 
-        self.declare_partials('lengths', 'def_mesh', rows=rows, cols=cols)
+        #self.declare_partials('lengths', 'def_mesh', rows=rows, cols=cols)
 
         rows = np.tile(base, 6)
         col = np.tile(3*base, 3) + np.repeat(np.arange(3), len(base))
         cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
 
-        self.declare_partials('chords', 'def_mesh', rows=rows, cols=cols)
+        #self.declare_partials('chords', 'def_mesh', rows=rows, cols=cols)
 
         size = (ny-1)*(nx-1)*3
         row = np.tile(np.arange(size).reshape((size, 1)), 3).flatten()
@@ -115,9 +115,9 @@ class VLMGeometry(ExplicitComponent):
             base + (ny+1)*3
         ])
 
-        self.declare_partials('normals', 'def_mesh', rows=rows, cols=cols)
+        #self.declare_partials('normals', 'def_mesh', rows=rows, cols=cols)
 
-        self.declare_partials('S_ref', 'def_mesh')
+        #self.declare_partials('S_ref', 'def_mesh')
 
     def compute(self, inputs, outputs):
         mesh = inputs['def_mesh']

@@ -44,7 +44,7 @@ class SectionPropertiesTube(ExplicitComponent):
         self.add_output('J', val=np.zeros((self.ny - 1)), units='m**4')
 
         a = np.arange((self.ny - 1))
-        self.declare_partials('*', '*', rows=a, cols=a)
+        #self.declare_partials('*', '*', rows=a, cols=a)
         self.set_check_partial_options(wrt='*', method='cs')
 
     def compute(self, inputs, outputs):

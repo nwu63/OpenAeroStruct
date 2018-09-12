@@ -36,7 +36,7 @@ class StructureWeightLoads(ExplicitComponent):
         self.add_input('load_factor', val=1.05)
         self.add_output('struct_weight_loads', val=np.zeros((self.ny, 6), dtype=complex), units='N')
 
-        self.declare_partials('*', '*',  method='cs')
+        #self.declare_partials('*', '*',  method='cs')
 
     def compute(self, inputs, outputs):
 

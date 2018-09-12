@@ -31,10 +31,10 @@ class VLMMtxRHSComp(ExplicitComponent):
         mtx_indices = np.arange(system_size * system_size).reshape((system_size, system_size))
         rhs_indices = np.arange(system_size)
 
-        self.declare_partials('rhs', 'freestream_velocities',
-            rows=np.einsum('i,j->ij', rhs_indices, np.ones(3, int)).flatten(),
-            cols=inflow_indices.flatten()
-        )
+        # self.declare_partials('rhs', 'freestream_velocities',
+        #     rows=np.einsum('i,j->ij', rhs_indices, np.ones(3, int)).flatten(),
+        #     cols=inflow_indices.flatten()
+        # )
 
         ind_1 = 0
         ind_2 = 0
@@ -58,18 +58,18 @@ class VLMMtxRHSComp(ExplicitComponent):
             )
             normals_indices = np.arange(num * 3).reshape((num, 3))
 
-            self.declare_partials('mtx', vel_mtx_name,
-                rows=np.einsum('ij,k->ijk', mtx_indices[:, ind_1:ind_2], np.ones(3, int)).flatten(),
-                cols=velocities_indices.flatten(),
-            )
-            self.declare_partials('mtx', normals_name,
-                rows=np.einsum('ij,k->ijk', mtx_indices[ind_1:ind_2, :], np.ones(3, int)).flatten(),
-                cols=np.einsum('ik,j->ijk', normals_indices, np.ones(system_size, int)).flatten(),
-            )
-            self.declare_partials('rhs', normals_name,
-                rows=np.outer(rhs_indices[ind_1:ind_2], np.ones(3, int)).flatten(),
-                cols=normals_indices.flatten(),
-            )
+            # #self.declare_partials('mtx', vel_mtx_name,
+            #     rows=np.einsum('ij,k->ijk', mtx_indices[:, ind_1:ind_2], np.ones(3, int)).flatten(),
+            #     cols=velocities_indices.flatten(),
+            # )
+            # #self.declare_partials('mtx', normals_name,
+            #     rows=np.einsum('ij,k->ijk', mtx_indices[ind_1:ind_2, :], np.ones(3, int)).flatten(),
+            #     cols=np.einsum('ik,j->ijk', normals_indices, np.ones(system_size, int)).flatten(),
+            # )
+            # #self.declare_partials('rhs', normals_name,
+            #     rows=np.outer(rhs_indices[ind_1:ind_2], np.ones(3, int)).flatten(),
+            #     cols=normals_indices.flatten(),
+            # )
 
             ind_1 += num
 

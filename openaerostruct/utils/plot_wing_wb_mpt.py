@@ -117,26 +117,26 @@ class Display(object):
         self.twist = []
         self.mesh = []
         self.def_mesh = []
-        self.def_mesh_maneuver = []
+#
         self.radius = []
         self.spar_thickness = []
         self.skin_thickness = []
         self.t_over_c = []
         sec_forces = []
-        sec_forces_maneuver = []
+#
         normals = []
-        normals_maneuver = []
+#
         widths = []
-        widths_maneuver = []
+#
         self.lift = []
         self.lift_ell = []
-        self.lift_maneuver = []
-        self.lift_ell_maneuver = []
+#
+#
         self.vonmises = []
         alpha = []
-        alpha_maneuver = []
+#
         rho = []
-        rho_maneuver = []
+#
         v = []
         self.CL = []
         self.AR = []
@@ -222,29 +222,29 @@ class Display(object):
                     self.struct_weights.append(case.outputs[name+'.structural_weight'])
                     
 
-                    vm_var_name = '{pt_name}.{surf_name}_perf.vonmises'.format(pt_name=pt_names[1], surf_name=name)
+                    vm_var_name = '{pt_name}.{surf_name}_perf.vonmises'.format(pt_name=pt_names[0], surf_name=name)
                     self.vonmises.append(np.max(case.outputs[vm_var_name], axis=1))
 
                     def_mesh_var_name = '{pt_name}.coupled.{surf_name}.def_mesh'.format(pt_name=pt_name, surf_name=name)
                     self.def_mesh.append(case.outputs[def_mesh_var_name])
                     
-                    def_mesh_var_name = '{pt_name}.coupled.{surf_name}.def_mesh'.format(pt_name=pt_names[1], surf_name=name)
-                    self.def_mesh_maneuver.append(case.outputs[def_mesh_var_name])
+                    def_mesh_var_name = '{pt_name}.coupled.{surf_name}.def_mesh'.format(pt_name=pt_names[0], surf_name=name)
+#
 
                     normals_var_name = '{pt_name}.coupled.{surf_name}.normals'.format(pt_name=pt_name, surf_name=name)
                     normals.append(case.outputs[normals_var_name])
                     
-                    normals_var_name = '{pt_name}.coupled.{surf_name}.normals'.format(pt_name=pt_names[1], surf_name=name)
-                    normals_maneuver.append(case.outputs[normals_var_name])
+                    normals_var_name = '{pt_name}.coupled.{surf_name}.normals'.format(pt_name=pt_names[0], surf_name=name)
+#
 
                     widths_var_name = '{pt_name}.coupled.{surf_name}.widths'.format(pt_name=pt_name, surf_name=name)
                     widths.append(case.outputs[widths_var_name])
                     
-                    widths_var_name = '{pt_name}.coupled.{surf_name}.widths'.format(pt_name=pt_names[1], surf_name=name)
-                    widths_maneuver.append(case.outputs[widths_var_name])
+                    widths_var_name = '{pt_name}.coupled.{surf_name}.widths'.format(pt_name=pt_names[0], surf_name=name)
+#
                     
                     sec_forces.append(case.outputs[pt_name+'.coupled.aero_states.' + name + '_sec_forces'])
-                    sec_forces_maneuver.append(case.outputs[pt_names[1]+'.coupled.aero_states.' + name + '_sec_forces'])
+#
 
                     cl_var_name = '{pt_name}.{surf_name}_perf.CL1'.format(pt_name=pt_name, surf_name=name)
                     self.CL.append(case.outputs[cl_var_name])
@@ -265,10 +265,10 @@ class Display(object):
 
             if self.show_wing:
                 alpha.append(case.outputs['alpha'] * np.pi / 180.)
-                alpha_maneuver.append(case.outputs['alpha_maneuver'] * np.pi / 180.)
+#
                 rho.append(case.outputs['rho'])
                 # SKETCHY
-                rho_maneuver.append(case.outputs['rho'])
+#
                 v.append(case.outputs['v'])
                 if self.show_tube:
                     self.cg.append(case.outputs['{pt_name}.cg'.format(pt_name=pt_name)])
@@ -319,13 +319,13 @@ class Display(object):
             if self.show_wing:
                 new_twist = []
                 new_sec_forces = []
-                new_sec_forces_maneuver = []
+#
                 new_def_mesh = []
-                new_def_mesh_maneuver = []
+#
                 new_widths = []
-                new_widths_maneuver = []
+#
                 new_normals = []
-                new_normals_maneuver = []
+#
 
             for i in range(self.num_iters):
                 for j, name in enumerate(names):
@@ -360,21 +360,21 @@ class Display(object):
                         mirror_forces = mirror_forces[:, ::-1, :]
                         new_sec_forces.append(np.hstack((sec_forces[i*n_names+j], mirror_forces)))
 
-                        mirror_mesh_maneuver = self.def_mesh_maneuver[i*n_names+j].copy()
-                        mirror_mesh_maneuver[:, :, 1] *= -1.
-                        mirror_mesh_maneuver = mirror_mesh_maneuver[:, ::-1, :][:, 1:, :]
-                        new_def_mesh_maneuver.append(np.hstack((self.def_mesh_maneuver[i*n_names+j], mirror_mesh_maneuver)))
+#
+#
+#
+#
 
-                        mirror_normals_maneuver = normals_maneuver[i*n_names+j].copy()
-                        mirror_normals_maneuver = mirror_normals_maneuver[:, ::-1, :][:, 1:, :]
-                        new_normals_maneuver.append(np.hstack((normals_maneuver[i*n_names+j], mirror_normals_maneuver)))
+#
+#
+#
 
-                        mirror_forces_maneuver = sec_forces_maneuver[i*n_names+j].copy()
-                        mirror_forces_maneuver = mirror_forces_maneuver[:, ::-1, :]
-                        new_sec_forces_maneuver.append(np.hstack((sec_forces_maneuver[i*n_names+j], mirror_forces_maneuver)))
+#
+#
+#
 
                         new_widths.append(np.hstack((widths[i*n_names+j], widths[i*n_names+j][::-1])))
-                        new_widths_maneuver.append(np.hstack((widths_maneuver[i*n_names+j], widths_maneuver[i*n_names+j][::-1])))
+#
                         twist = self.twist[i*n_names+j]
                         new_twist.append(np.hstack((twist[0], twist[0][::-1][1:])))
 
@@ -389,10 +389,10 @@ class Display(object):
                 self.def_mesh = new_def_mesh
                 self.twist = new_twist
                 widths = new_widths
-                widths_maneuver = new_widths_maneuver
+#
                 normals = new_normals
                 sec_forces = new_sec_forces
-                sec_forces_maneuver = new_sec_forces_maneuver
+#
 
         if self.show_wing:
             for i in range(self.num_iters):
@@ -410,12 +410,12 @@ class Display(object):
                     # SKETCHY
                     lift = (-forces[:, 0] * sina + forces[:, 2] * cosa) / \
                         widths[i*n_names+j]/0.5/rho[i][0]/v[i]**2
-                    a_maneuver = alpha_maneuver[i]
-                    cosa_maneuver = np.cos(a_maneuver)
-                    sina_maneuver = np.sin(a_maneuver)
-                    forces_maneuver = np.sum(sec_forces_maneuver[i*n_names+j], axis=0)
-                    lift_maneuver= (-forces_maneuver[:, 0] * sina_maneuver + forces_maneuver[:, 2] * cosa_maneuver) / \
-                        widths_maneuver[i*n_names+j]/0.5/rho_maneuver[i][1]/v[i]**2
+#
+#
+#
+#
+#
+#
 
                     span = (m_vals[0, :, 1] / (m_vals[0, -1, 1] - m_vals[0, 0, 1]))
                     span = span - (span[0] + .5)
@@ -428,18 +428,18 @@ class Display(object):
                     lift_ell = lift_ell / normalize_factor
                     lift = lift / normalize_factor
                     
-                    lift_area_maneuver = np.sum(lift_maneuver * (span[1:] - span[:-1]))
+#
 
-                    lift_ell_maneuver = 4 * lift_area_maneuver / np.pi * np.sqrt(1 - (2*span)**2)
+#
                     
-                    normalize_factor = max(lift_ell_maneuver) / 4 * np.pi
-                    lift_ell_maneuver = lift_ell_maneuver / normalize_factor
-                    lift_maneuver = lift_maneuver / normalize_factor
+#
+#
+#
 
                     self.lift.append(lift)
                     self.lift_ell.append(lift_ell)
-                    self.lift_maneuver.append(lift_maneuver)
-                    self.lift_ell_maneuver.append(lift_ell_maneuver)
+#
+#
 
                     wingspan = np.abs(m_vals[0, -1, 1] - m_vals[0, 0, 1])
                     self.AR.append(wingspan**2 / self.S_ref[i*n_names+j])
@@ -468,9 +468,9 @@ class Display(object):
             self.max_twist += diff
             self.min_l, self.max_l = self.get_list_limits(self.lift)
             self.min_le, self.max_le = self.get_list_limits(self.lift_ell)
-            self.min_l_maneuver, self.max_l_maneuver = self.get_list_limits(self.lift_maneuver)
-            self.min_le_maneuver, self.max_le_maneuver = self.get_list_limits(self.lift_ell_maneuver)
-            self.min_l, self.max_l = min(self.min_l, self.min_le, self.min_l_maneuver, self.min_le_maneuver), max(self.max_l, self.max_le, self.max_l_maneuver, self.max_le_maneuver)
+#
+#
+#
             diff = (self.max_l - self.min_l) * 0.05
             self.min_l -= diff
             self.max_l += diff
@@ -551,15 +551,15 @@ class Display(object):
             if self.show_wing:
                 t_vals = self.twist[self.curr_pos*n_names+j]
                 l_vals = self.lift[self.curr_pos*n_names+j]
-                l_maneuver_vals = self.lift_maneuver[self.curr_pos*n_names+j]
+#
                 le_vals = self.lift_ell[self.curr_pos*n_names+j]
-                le_vals_maneuver = self.lift_ell_maneuver[self.curr_pos*n_names+j]
+#
 
                 self.ax2.plot(rel_span, t_vals, lw=2, c='k')
                 self.ax3.plot(rel_span, le_vals, '--', lw=2, c='k', alpha = 0.8)
                 self.ax3.plot(span_diff, l_vals, lw=2, c=my_blue)
-                self.ax3.plot(span_diff, l_maneuver_vals, lw=2, c=my_orange)
-                # self.ax3.plot(rel_span, le_vals_maneuver, '--', lw=2, c='k')
+#
+#
 
             if self.show_tube:
                 skinthick = self.skin_thickness[self.curr_pos*n_names+j]

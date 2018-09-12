@@ -40,8 +40,8 @@ class NonIntersectingThickness(ExplicitComponent):
         self.add_output('thickness_intersects', val=np.zeros((self.ny-1)), units='m')
 
         arange = np.arange(self.ny-1)
-        self.declare_partials('thickness_intersects', 'thickness', rows=arange, cols=arange, val=1.)
-        self.declare_partials('thickness_intersects', 'radius', rows=arange, cols=arange, val=-1.)
+        #self.declare_partials('thickness_intersects', 'thickness', rows=arange, cols=arange, val=1.)
+        #self.declare_partials('thickness_intersects', 'radius', rows=arange, cols=arange, val=-1.)
 
     def compute(self, inputs, outputs):
         outputs['thickness_intersects'] = inputs['thickness'] - inputs['radius']

@@ -40,7 +40,7 @@ class WingboxFuelVolDelta(ExplicitComponent):
         self.add_input('fuel_vols', val=np.zeros((self.ny-1)), units='m**3')
         self.add_output('fuel_vol_delta', val=0., units='m**3')
 
-        self.declare_partials('*', '*', method='cs')
+        #self.declare_partials('*', '*', method='cs')
 
     def compute(self, inputs, outputs):
         fuel_weight = inputs['fuelburn']

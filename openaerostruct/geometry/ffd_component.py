@@ -59,7 +59,7 @@ class GeometryMesh(ExplicitComponent):
 
         self.add_output('mesh', val=surface['mesh'], units='m')
 
-        self.declare_partials('*', '*')
+        #self.declare_partials('*', '*')
 
     def compute(self, inputs, outputs):
         surface = self.surface

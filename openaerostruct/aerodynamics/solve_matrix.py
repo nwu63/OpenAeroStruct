@@ -27,18 +27,18 @@ class SolveMatrix(ImplicitComponent):
         self.add_input('rhs', shape=system_size, units='m/s')
         self.add_output('circulations', shape=system_size, units='m**2/s')
 
-        self.declare_partials('circulations', 'circulations',
-            rows=np.outer(np.arange(system_size), np.ones(system_size, int)).flatten(),
-            cols=np.outer(np.ones(system_size, int), np.arange(system_size)).flatten(),
-        )
-        self.declare_partials('circulations', 'mtx',
-            rows=np.outer(np.arange(system_size), np.ones(system_size, int)).flatten(),
-            cols=np.arange(system_size ** 2),
-        )
-        self.declare_partials('circulations', 'rhs', val=-1.,
-            rows=np.arange(system_size),
-            cols=np.arange(system_size),
-        )
+        # #self.declare_partials('circulations', 'circulations',
+        #     rows=np.outer(np.arange(system_size), np.ones(system_size, int)).flatten(),
+        #     cols=np.outer(np.ones(system_size, int), np.arange(system_size)).flatten(),
+        # )
+        # #self.declare_partials('circulations', 'mtx',
+        #     rows=np.outer(np.arange(system_size), np.ones(system_size, int)).flatten(),
+        #     cols=np.arange(system_size ** 2),
+        # )
+        # #self.declare_partials('circulations', 'rhs', val=-1.,
+        #     rows=np.arange(system_size),
+        #     cols=np.arange(system_size),
+        # )
 
     def apply_nonlinear(self, inputs, outputs, residuals):
         residuals['circulations'] = inputs['mtx'].dot(outputs['circulations']) - inputs['rhs']

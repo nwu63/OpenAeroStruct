@@ -47,7 +47,7 @@ class BreguetRange(ExplicitComponent):
 
         self.add_output('fuelburn', val=1., units='kg')
 
-        self.declare_partials('*', '*')
+        #self.declare_partials('*', '*')
         self.set_check_partial_options(wrt='*', method='cs', step=1e-30)
 
     def compute(self, inputs, outputs):

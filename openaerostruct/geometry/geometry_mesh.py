@@ -112,10 +112,10 @@ class GeometryMesh(ExplicitComponent):
         # additional rotation matrix to modify the twist direction
         self.rotate_x = True
 
-        self.declare_partials('*', '*')
+        #self.declare_partials('*', '*')
 
-        if not fortran_flag:
-            self.declare_partials('*', '*', method='fd')
+        #if not fortran_flag:
+            #self.declare_partials('*', '*', method='fd')
 
     def compute(self, inputs, outputs):
         mesh = self.mesh.copy()

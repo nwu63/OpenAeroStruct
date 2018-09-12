@@ -41,8 +41,8 @@ class GetVectors(ExplicitComponent):
                 np.ones((nx, actual_ny_size), int),
             ).flatten()
 
-            self.declare_partials(vectors_name, name + '_vortex_mesh', val=-1., rows=vector_indices, cols=mesh_indices)
-            self.declare_partials(vectors_name, eval_name, val= 1., rows=vector_indices, cols=eval_indices)
+            #self.declare_partials(vectors_name, name + '_vortex_mesh', val=-1., rows=vector_indices, cols=mesh_indices)
+            #self.declare_partials(vectors_name, eval_name, val= 1., rows=vector_indices, cols=eval_indices)
 
     def compute(self, inputs, outputs):
         surfaces = self.options['surfaces']

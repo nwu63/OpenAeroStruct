@@ -13,7 +13,7 @@ class MultiCD(ExplicitComponent):
             self.add_input(str(i) + '_CD', val=0.)
 
         self.add_output('CD', val=0.)
-        self.declare_partials('*', '*', val=1.)
+        #self.declare_partials('*', '*', val=1.)
 
     def compute(self, inputs, outputs):
         outputs['CD'] = 0.

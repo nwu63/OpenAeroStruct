@@ -35,34 +35,34 @@ class PanelForces(ExplicitComponent):
         self.add_input('bound_vecs', shape=(system_size, 3), units='m')
         self.add_output('panel_forces', shape=(system_size, 3), units='N')
 
-        self.declare_partials('panel_forces', 'rho',
-            rows=np.arange(3 * system_size),
-            cols=np.zeros(3 * system_size, int),
-        )
-        self.declare_partials('panel_forces', 'horseshoe_circulations',
-            rows=np.arange(3 * system_size),
-            cols=np.outer(np.arange(system_size), np.ones(3, int)).flatten(),
-        )
-        self.declare_partials('panel_forces', velocities_name,
-            rows=np.einsum('ij,k->ijk',
-                np.arange(3 * system_size).reshape((system_size, 3)),
-                np.ones(3, int),
-            ).flatten(),
-            cols=np.einsum('ik,j->ijk',
-                np.arange(3 * system_size).reshape((system_size, 3)),
-                np.ones(3, int),
-            ).flatten(),
-        )
-        self.declare_partials('panel_forces', 'bound_vecs',
-            rows=np.einsum('ij,k->ijk',
-                np.arange(3 * system_size).reshape((system_size, 3)),
-                np.ones(3, int),
-            ).flatten(),
-            cols=np.einsum('ik,j->ijk',
-                np.arange(3 * system_size).reshape((system_size, 3)),
-                np.ones(3, int),
-            ).flatten(),
-        )
+        # #self.declare_partials('panel_forces', 'rho',
+        #     rows=np.arange(3 * system_size),
+        #     cols=np.zeros(3 * system_size, int),
+        # )
+        # #self.declare_partials('panel_forces', 'horseshoe_circulations',
+        #     rows=np.arange(3 * system_size),
+        #     cols=np.outer(np.arange(system_size), np.ones(3, int)).flatten(),
+        # )
+        # #self.declare_partials('panel_forces', velocities_name,
+        #     rows=np.einsum('ij,k->ijk',
+        #         np.arange(3 * system_size).reshape((system_size, 3)),
+        #         np.ones(3, int),
+        #     ).flatten(),
+        #     cols=np.einsum('ik,j->ijk',
+        #         np.arange(3 * system_size).reshape((system_size, 3)),
+        #         np.ones(3, int),
+        #     ).flatten(),
+        # )
+        # #self.declare_partials('panel_forces', 'bound_vecs',
+        #     rows=np.einsum('ij,k->ijk',
+        #         np.arange(3 * system_size).reshape((system_size, 3)),
+        #         np.ones(3, int),
+        #     ).flatten(),
+        #     cols=np.einsum('ik,j->ijk',
+        #         np.arange(3 * system_size).reshape((system_size, 3)),
+        #         np.ones(3, int),
+        #     ).flatten(),
+        # )
 
     def compute(self, inputs, outputs):
         velocities_name = '{}_velocities'.format('force_pts')
