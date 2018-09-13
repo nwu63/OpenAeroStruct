@@ -219,7 +219,7 @@ class AerostructPoint(Group):
 
         coupled.nonlinear_solver = NonlinearBlockGS(use_aitken=True)
         coupled.nonlinear_solver.options['maxiter'] = 50
-        coupled.nonlinear_solver.options['atol'] = 5e-6
+        coupled.nonlinear_solver.options['atol'] = 1e-8
         coupled.nonlinear_solver.options['rtol'] = 1e-12
 
         # coupled.linear_solver = DirectSolver()
@@ -229,7 +229,7 @@ class AerostructPoint(Group):
 
         # coupled.nonlinear_solver = NewtonSolver(solve_subsystems=True)
         # coupled.nonlinear_solver.options['maxiter'] = 50
-        coupled.nonlinear_solver.options['iprint'] = 0
+        coupled.nonlinear_solver.options['iprint'] = 1
 
         """
         ### End change of solver settings ###
