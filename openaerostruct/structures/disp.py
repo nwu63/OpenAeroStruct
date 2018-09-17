@@ -41,7 +41,7 @@ class Disp(ExplicitComponent):
         n = self.ny * 6
         disp_disp_aug = np.zeros((n, n+6))
         disp_disp_aug[:n, :n] = np.eye((n))
-        self.declare_partials('disp', 'disp_aug', val=disp_disp_aug)
+        #self.declare_partials('disp', 'disp_aug', val=disp_disp_aug)
 
     def compute(self, inputs, outputs):
         # Obtain the relevant portions of disp_aug and store the reshaped

@@ -93,7 +93,7 @@ class CollocationPoints(ExplicitComponent):
                 0.25 * 0.5 * np.ones((nx - 1) * (ny - 1) * 3),  # FL
                 0.75 * 0.5 * np.ones((nx - 1) * (ny - 1) * 3),  # BL
             ])
-            self.declare_partials('coll_pts', mesh_name, val=data, rows=rows, cols=cols)
+            #self.declare_partials('coll_pts', mesh_name, val=data, rows=rows, cols=cols)
 
             # Compute the Jacobian for `force_pts` wrt the meshes.
             # These do not change; the Jacobian is linear.
@@ -103,7 +103,7 @@ class CollocationPoints(ExplicitComponent):
                 0.75 * 0.5 * np.ones((nx - 1) * (ny - 1) * 3),  # FL
                 0.25 * 0.5 * np.ones((nx - 1) * (ny - 1) * 3),  # BL
             ])
-            self.declare_partials('force_pts', mesh_name, val=data, rows=rows, cols=cols)
+            #self.declare_partials('force_pts', mesh_name, val=data, rows=rows, cols=cols)
 
             # Compute the Jacobian for `bound_vecs` wrt the meshes.
             # These do not change; the Jacobian is linear.
@@ -113,7 +113,7 @@ class CollocationPoints(ExplicitComponent):
                 -0.75 * np.ones((nx - 1) * (ny - 1) * 3),  # FL
                 -0.25 * np.ones((nx - 1) * (ny - 1) * 3),  # BL
             ])
-            self.declare_partials('bound_vecs', mesh_name, val=data, rows=rows, cols=cols)
+            #self.declare_partials('bound_vecs', mesh_name, val=data, rows=rows, cols=cols)
 
             ind_eval_points_1 += (nx - 1) * (ny - 1)
 

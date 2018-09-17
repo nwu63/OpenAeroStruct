@@ -43,16 +43,16 @@ class TotalLoads(ExplicitComponent):
 
         arange = np.arange(self.ny * 6)
 
-        self.declare_partials('total_loads', 'loads',
-            rows=arange, cols=arange, val=1.)
+        # #self.declare_partials('total_loads', 'loads',
+        #     rows=arange, cols=arange, val=1.)
 
-        if self.surface['struct_weight_relief']:
-            self.declare_partials('total_loads', 'struct_weight_loads',
-                rows=arange, cols=arange, val=1.)
+        # if self.surface['struct_weight_relief']:
+        #     #self.declare_partials('total_loads', 'struct_weight_loads',
+        #         rows=arange, cols=arange, val=1.)
 
-        if self.surface['distributed_fuel_weight']:
-            self.declare_partials('total_loads', 'fuel_weight_loads',
-                rows=arange, cols=arange, val=1.)
+        # if self.surface['distributed_fuel_weight']:
+        #     #self.declare_partials('total_loads', 'fuel_weight_loads',
+        #         rows=arange, cols=arange, val=1.)
 
     def compute(self, inputs, outputs):
         outputs['total_loads'] = inputs['loads']

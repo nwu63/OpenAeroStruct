@@ -88,7 +88,7 @@ class VortexMesh(ExplicitComponent):
                     -np.ones((ny-1)),  # back row
                 ])
 
-                self.declare_partials(vortex_mesh_name, mesh_name, val=data, rows=rows, cols=cols)
+                #self.declare_partials(vortex_mesh_name, mesh_name, val=data, rows=rows, cols=cols)
 
             else:
                 self.add_output(vortex_mesh_name, shape=(nx, ny, 3), units='m')
@@ -110,7 +110,7 @@ class VortexMesh(ExplicitComponent):
                     np.ones(ny * 3),  # back row
                 ])
 
-                self.declare_partials(vortex_mesh_name, mesh_name, val=data, rows=rows, cols=cols)
+                #self.declare_partials(vortex_mesh_name, mesh_name, val=data, rows=rows, cols=cols)
 
     def compute(self, inputs, outputs):
         surfaces = self.options['surfaces']

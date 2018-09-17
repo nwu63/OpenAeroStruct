@@ -86,7 +86,7 @@ class HorseshoeCirculations(ExplicitComponent):
         # Actually create the sparse matrix based on these rows and cols
         self.mtx = csc_matrix((data, (rows, cols)), shape=(system_size, system_size))
 
-        self.declare_partials('horseshoe_circulations', 'circulations', val=data, rows=rows, cols=cols)
+        #self.declare_partials('horseshoe_circulations', 'circulations', val=data, rows=rows, cols=cols)
 
     def compute(self, inputs, outputs):
         outputs['horseshoe_circulations'] = self.mtx.dot(inputs['circulations'])

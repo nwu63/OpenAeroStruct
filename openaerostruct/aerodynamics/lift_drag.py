@@ -40,7 +40,7 @@ class LiftDrag(ExplicitComponent):
         self.add_output('L', val=0., units='N')
         self.add_output('D', val=0., units='N')
 
-        self.declare_partials('*', '*')
+        #self.declare_partials('*', '*')
 
     def compute(self, inputs, outputs):
         alpha = inputs['alpha'] * np.pi / 180.

@@ -40,8 +40,8 @@ class StructuralCG(ExplicitComponent):
         self.add_output('cg_location', val=np.zeros((3)), units='m')
 
         # Setup Partials
-        self.declare_partials(of='cg_location', wrt='structural_weight')
-        self.declare_partials(of='cg_location', wrt='element_weights')
+        #self.declare_partials(of='cg_location', wrt='structural_weight')
+        #self.declare_partials(of='cg_location', wrt='element_weights')
         # Setup Sparce Matrix
         dimensions = 3
         cols_const = np.arange(0,self.ny*dimensions,dimensions)
@@ -51,7 +51,7 @@ class StructuralCG(ExplicitComponent):
             rows[i*self.ny:i*self.ny+self.ny]=i
             cols[i*self.ny:i*self.ny+self.ny]=cols_const+i
 
-        self.declare_partials(of='cg_location', wrt='nodes', rows=rows, cols=cols)
+        #self.declare_partials(of='cg_location', wrt='nodes', rows=rows, cols=cols)
 
         # Check partials options
         self.set_check_partial_options('*', method='cs', step=1e-40)

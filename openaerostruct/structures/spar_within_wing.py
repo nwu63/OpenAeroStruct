@@ -46,10 +46,10 @@ class SparWithinWing(ExplicitComponent):
         self.add_input('t_over_c', val=np.zeros((self.ny-1)))
         self.add_output('spar_within_wing', val=np.zeros((self.ny-1)), units='m')
 
-        self.declare_partials('spar_within_wing', 'mesh', method='cs')
+        #self.declare_partials('spar_within_wing', 'mesh', method='cs')
 
         arange = np.arange(self.ny - 1)
-        self.declare_partials('spar_within_wing', 'radius', rows=arange, cols=arange, val=1.)
+        #self.declare_partials('spar_within_wing', 'radius', rows=arange, cols=arange, val=1.)
 
     def compute(self, inputs, outputs):
         mesh = inputs['mesh']

@@ -49,7 +49,7 @@ class WingboxGeometry(ExplicitComponent):
         self.add_output('fem_chords', val=np.ones((ny - 1)),units='m')
         self.add_output('fem_twists', val=np.ones((ny - 1)),units='deg')
 
-        self.declare_partials('*', '*', method='fd')
+        #self.declare_partials('*', '*', method='fd')
 
     def compute(self, inputs, outputs):
         mesh = inputs['mesh']

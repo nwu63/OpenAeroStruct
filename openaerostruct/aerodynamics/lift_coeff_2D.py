@@ -54,20 +54,20 @@ class LiftCoeff2D(ExplicitComponent):
         # Outputs
         self.add_output('Cl', val=np.zeros((self.ny-1)))
 
-        self.declare_partials('Cl', 'widths')
-        self.declare_partials('Cl', 'v')
-        self.declare_partials('Cl', 'rho')
-        self.declare_partials('Cl', 'alpha')
+        # self.declare_partials('Cl', 'widths')
+        # self.declare_partials('Cl', 'v')
+        # self.declare_partials('Cl', 'rho')
+        # self.declare_partials('Cl', 'alpha')
 
-        # Added to declare Jacobian sparse
-        arange = np.arange(self.ny - 1)
-        rows = np.tile(arange, 2)
-        cols = np.hstack((arange, arange+1))
-        self.declare_partials('Cl', 'chords', rows=rows, cols=cols)
+        # # Added to declare Jacobian sparse
+        # arange = np.arange(self.ny - 1)
+        # rows = np.tile(arange, 2)
+        # cols = np.hstack((arange, arange+1))
+        # self.declare_partials('Cl', 'chords', rows=rows, cols=cols)
 
-        rows = np.tile(np.repeat(arange, 3), self.nx-1)
-        cols = np.arange((self.ny-1)*(self.nx-1)*3)
-        self.declare_partials('Cl', 'sec_forces', rows=rows, cols=cols)
+        # rows = np.tile(np.repeat(arange, 3), self.nx-1)
+        # cols = np.arange((self.ny-1)*(self.nx-1)*3)
+        # self.declare_partials('Cl', 'sec_forces', rows=rows, cols=cols)
 
 
     def compute(self, inputs, outputs):

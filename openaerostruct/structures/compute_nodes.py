@@ -58,7 +58,7 @@ class ComputeNodes(ExplicitComponent):
         rows = np.hstack((arange, arange))
         cols = np.hstack((arange, arange + (nx - 1) * n))
 
-        self.declare_partials('nodes', 'mesh', rows=rows, cols=cols, val=data)
+        #self.declare_partials('nodes', 'mesh', rows=rows, cols=cols, val=data)
 
     def compute(self, inputs, outputs):
         w = self.fem_origin

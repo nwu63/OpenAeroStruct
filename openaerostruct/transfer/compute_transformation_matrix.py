@@ -59,7 +59,7 @@ class ComputeTransformationMatrix(ExplicitComponent):
         cols = np.einsum('il,jk->ijkl',
             get_array_indices(ny, 6)[:, 3:],
             np.ones((3, 3), int)).flatten()
-        self.declare_partials('transformation_matrix', 'disp', rows=rows, cols=cols)
+        #self.declare_partials('transformation_matrix', 'disp', rows=rows, cols=cols)
 
     def compute(self, inputs, outputs):
         # We populate the diagonal of each transformation matrix to account

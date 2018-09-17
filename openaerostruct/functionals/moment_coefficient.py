@@ -58,7 +58,7 @@ class MomentCoefficient(ExplicitComponent):
 
         self.add_output('CM', val=np.ones((3)))
 
-        self.declare_partials(of='*', wrt='*')
+        #self.declare_partials(of='*', wrt='*')
 
     def compute(self, inputs, outputs):
         cg = inputs['cg']

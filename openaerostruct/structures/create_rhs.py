@@ -38,7 +38,7 @@ class CreateRHS(ExplicitComponent):
         forces_loads = np.zeros((n + 6, n))
         forces_loads[:n, :n] = np.eye((n))
 
-        self.declare_partials('forces', 'total_loads', val=forces_loads)
+        #self.declare_partials('forces', 'total_loads', val=forces_loads)
 
         rows = np.arange(2, (self.ny-1)*6, 6)
         rows = np.hstack((rows, rows+6))

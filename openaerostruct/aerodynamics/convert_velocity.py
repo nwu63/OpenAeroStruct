@@ -50,8 +50,8 @@ class ConvertVelocity(ExplicitComponent):
 
         self.add_output('freestream_velocities', shape=(system_size, 3), units='m/s')
 
-        self.declare_partials('freestream_velocities', 'alpha')
-        self.declare_partials('freestream_velocities', 'v')
+        #self.declare_partials('freestream_velocities', 'alpha')
+        #self.declare_partials('freestream_velocities', 'v')
 
     def compute(self, inputs, outputs):
         # Rotate the freestream velocities based on the angle of attack.

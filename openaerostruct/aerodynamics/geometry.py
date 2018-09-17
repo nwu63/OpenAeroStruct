@@ -60,61 +60,64 @@ class VLMGeometry(ExplicitComponent):
         # Next up we have a lot of rows and cols settings for the sparse
         # Jacobians. Each set of partials needs a different rows/cols setup
 
-        # b_pts
-        size = (nx-1) * ny * 3
-        base = np.arange(size)
-        rows = np.tile(base, 2)
-        cols = rows + np.repeat([0, ny*3], len(base))
-        val = np.empty((2*size, ))
-        val[:size] = 0.75
-        val[size:] = 0.25
-        self.declare_partials('b_pts', 'def_mesh', rows=rows, cols=cols, val=val)
+        # # b_pts
+        # size = (nx-1) * ny * 3
+        # base = np.arange(size)
+        # rows = np.tile(base, 2)
+        # cols = rows + np.repeat([0, ny*3], len(base))
+        # val = np.empty((2*size, ))
+        # val[:size] = 0.75
+        # val[size:] = 0.25
+        # self.declare_partials('b_pts', 'def_mesh', rows=rows, cols=cols, val=val)
 
-        # widths
-        size = ny - 1
-        base = np.arange(size)
-        rows = np.tile(base, 12)
-        col = np.tile(3*base, 6) + np.repeat(np.arange(6), len(base))
-        cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
-        self.declare_partials('widths', 'def_mesh', rows=rows, cols=cols)
+        # # widths
+        # size = ny - 1
+        # base = np.arange(size)
+        # rows = np.tile(base, 12)
+        # col = np.tile(3*base, 6) + np.repeat(np.arange(6), len(base))
+        # cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
 
-        # cos_sweep
-        rows = np.tile(base, 8)
-        col = np.tile(3*base, 4) + np.repeat([1, 2, 4, 5], len(base))
-        cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
-        self.declare_partials('cos_sweep', 'def_mesh', rows=rows, cols=cols)
+        # self.declare_partials('widths', 'def_mesh', rows=rows, cols=cols)
 
-        # lengths
-        size = ny
-        base = np.arange(size)
-        rows = np.tile(base, nx * 3)
-        col = np.tile(3*base, 3) + np.repeat(np.arange(3), len(base))
-        cols = np.tile(col, nx) + np.repeat(3*ny*np.arange(nx), len(col))
-        self.declare_partials('lengths', 'def_mesh', rows=rows, cols=cols)
+        # # cos_sweep
+        # rows = np.tile(base, 8)
+        # col = np.tile(3*base, 4) + np.repeat([1, 2, 4, 5], len(base))
+        # cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
 
-        # chords
-        rows = np.tile(base, 6)
-        col = np.tile(3*base, 3) + np.repeat(np.arange(3), len(base))
-        cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
-        self.declare_partials('chords', 'def_mesh', rows=rows, cols=cols)
+        # self.declare_partials('cos_sweep', 'def_mesh', rows=rows, cols=cols)
 
-        # normals
-        size = (ny-1)*(nx-1)*3
-        row = np.tile(np.arange(size).reshape((size, 1)), 3).flatten()
-        rows = np.tile(row, 4)
-        base = np.tile(np.arange(3), size) + np.repeat(3*np.arange(size//3), 9)
-        base += np.repeat(3*np.arange(nx-1), 9*(ny-1))
-        cols = np.concatenate([
-            base + 3,
-            base + ny*3,
-            base,
-            base + (ny+1)*3
-        ])
-        self.declare_partials('normals', 'def_mesh', rows=rows, cols=cols)
+        # # lengths
+        # size = ny
+        # base = np.arange(size)
+        # rows = np.tile(base, nx * 3)
+        # col = np.tile(3*base, 3) + np.repeat(np.arange(3), len(base))
+        # cols = np.tile(col, nx) + np.repeat(3*ny*np.arange(nx), len(col))
 
-        # And here actually all parts of the mesh influence the area, so it's
-        # fully dense
-        self.declare_partials('S_ref', 'def_mesh')
+        # self.declare_partials('lengths', 'def_mesh', rows=rows, cols=cols)
+
+        # # chords
+        # rows = np.tile(base, 6)
+        # col = np.tile(3*base, 3) + np.repeat(np.arange(3), len(base))
+        # cols = np.tile(col, 2) + np.repeat([0, (nx-1)*ny*3], len(col))
+
+        # self.declare_partials('chords', 'def_mesh', rows=rows, cols=cols)
+
+        # # normals
+        # size = (ny-1)*(nx-1)*3
+        # row = np.tile(np.arange(size).reshape((size, 1)), 3).flatten()
+        # rows = np.tile(row, 4)
+        # base = np.tile(np.arange(3), size) + np.repeat(3*np.arange(size//3), 9)
+        # base += np.repeat(3*np.arange(nx-1), 9*(ny-1))
+        # cols = np.concatenate([
+        #     base + 3,
+        #     base + ny*3,
+        #     base,
+        #     base + (ny+1)*3
+        # ])
+
+        # self.declare_partials('normals', 'def_mesh', rows=rows, cols=cols)
+
+        # self.declare_partials('S_ref', 'def_mesh')
 
     def compute(self, inputs, outputs):
         mesh = inputs['def_mesh']

@@ -29,8 +29,8 @@ class RadiusComp(ExplicitComponent):
         self.add_output('radius', val=np.ones((self.ny - 1)), units='m')
 
         arange  = np.arange(self.ny-1)
-        self.declare_partials('radius','t_over_c',rows=arange,cols=arange)
-        self.declare_partials('radius','mesh')
+        #self.declare_partials('radius','t_over_c',rows=arange,cols=arange)
+        #self.declare_partials('radius','mesh')
 
     def compute(self, inputs, outputs):
         outputs['radius'] = radii(inputs['mesh'], inputs['t_over_c'])

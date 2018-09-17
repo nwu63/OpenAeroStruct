@@ -70,18 +70,18 @@ class EvalVelocities(ExplicitComponent):
         circulations_indices = np.arange(system_size)
         velocities_indices = np.arange(num_eval_points * 3).reshape((num_eval_points, 3))
 
-        self.declare_partials(velocities_name, 'circulations',
-            rows=np.einsum('ik,j->ijk',
-                velocities_indices, np.ones(system_size, int)).flatten(),
-            cols=np.einsum('ik,j->ijk',
-                np.ones((num_eval_points, 3), int), circulations_indices).flatten(),
-        )
+        #self.declare_partials(velocities_name, 'circulations',
+        #     rows=np.einsum('ik,j->ijk',
+        #         velocities_indices, np.ones(system_size, int)).flatten(),
+        #     cols=np.einsum('ik,j->ijk',
+        #         np.ones((num_eval_points, 3), int), circulations_indices).flatten(),
+        # )
 
-        # These derivatives are linear and don't change so we set the val here
-        self.declare_partials(velocities_name, 'freestream_velocities', val=1.,
-            rows=np.arange(3 * num_eval_points),
-            cols=np.arange(3 * num_eval_points),
-        )
+        # # These derivatives are linear and don't change so we set the val here
+        # #self.declare_partials(velocities_name, 'freestream_velocities', val=1.,
+        #     rows=np.arange(3 * num_eval_points),
+        #     cols=np.arange(3 * num_eval_points),
+        # )
 
         # For each surface we need to correctly set up the sparsity pattern
         # based on the vel_mtx. This is pretty hairy due to the highly
@@ -105,10 +105,10 @@ class EvalVelocities(ExplicitComponent):
             vel_mtx_indices = np.arange(num_eval_points * num * 3).reshape(
                 (num_eval_points, num, 3))
 
-            self.declare_partials(velocities_name, vel_mtx_name,
-                rows=np.einsum('ik,j->ijk', velocities_indices, np.ones(num, int)).flatten(),
-                cols=vel_mtx_indices.flatten(),
-            )
+            #self.declare_partials(velocities_name, vel_mtx_name,
+            #     rows=np.einsum('ik,j->ijk', velocities_indices, np.ones(num, int)).flatten(),
+            #     cols=vel_mtx_indices.flatten(),
+            # )
 
             ind_1 += num
 

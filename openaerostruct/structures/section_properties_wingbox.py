@@ -51,7 +51,7 @@ class SectionPropertiesWingbox(ExplicitComponent):
         self.add_output('hfront', val=np.ones((self.ny - 1),  dtype = complex),units='m')
         self.add_output('hrear', val=np.ones((self.ny - 1),  dtype = complex),units='m')
 
-        self.declare_partials('*', '*', method='cs')
+        #self.declare_partials('*', '*', method='cs')
 
     def compute(self, inputs, outputs):
 
