@@ -873,10 +873,10 @@ def getFullMesh(left_mesh=None, right_mesh=None):
     elif left_mesh is not None and right_mesh is not None:
         raise ValueError("Please only provide either left or right mesh, not both.")
     elif left_mesh is not None:
-        right_mesh = np.flip(left_mesh,axis=1).copy()
+        right_mesh = np.fliplr(left_mesh).copy()
         right_mesh[:,:,1] *= -1
     else:
-        left_mesh = np.flip(right_mesh,axis=1).copy()
+        left_mesh = np.fliplr(right_mesh).copy()
         left_mesh[:,:,1] *= -1
     full_mesh = np.concatenate((left_mesh,right_mesh[:,1:,:]),axis=1)
     return full_mesh
