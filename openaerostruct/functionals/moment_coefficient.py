@@ -57,6 +57,7 @@ class MomentCoefficient(ExplicitComponent):
         self.add_input('S_ref_total', val=1., units='m**2')
 
         self.add_output('CM', val=np.ones((3)))
+        self.add_output('MAC', val=1.0, units='m')
 
         #self.declare_partials(of='*', wrt='*')
 
@@ -114,7 +115,7 @@ class MomentCoefficient(ExplicitComponent):
                 self.MAC_wing = MAC
 
         self.M = M
-
+        outputs['MAC'] = self.MAC_wing
         # Compute the normalized CM
         rho = inputs['rho']
         outputs['CM'] = M / (0.5 * rho * inputs['v']**2 * inputs['S_ref_total'] * self.MAC_wing)
