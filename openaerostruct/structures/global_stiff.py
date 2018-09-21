@@ -6,7 +6,7 @@ from openmdao.api import ExplicitComponent
 from openaerostruct.utils.vector_algebra import add_ones_axis
 from openaerostruct.utils.vector_algebra import compute_norm, compute_norm_deriv
 from openaerostruct.utils.vector_algebra import compute_cross, compute_cross_deriv1, compute_cross_deriv2
-
+from openaerostruct.utils.testing import view_mat
 
 class GlobalStiff(ExplicitComponent):
 
@@ -18,7 +18,11 @@ class GlobalStiff(ExplicitComponent):
 
         self.ny = ny = surface['mesh'].shape[1]
 
-        size = 6 * ny + 6
+        self.more_dof = 0
+        if surface['name'] == 'wing':
+            self.more_dof = 1
+        
+        size = 6 * ny + 6 + self.more_dof
 
         self.add_input('nodes', shape=(ny, 3), units='m')
         self.add_input('local_stiff_transformed', shape=(ny - 1, 12, 12))
@@ -61,3 +65,15 @@ class GlobalStiff(ExplicitComponent):
 
         outputs['K'][index + arange, num_dofs + arange] = 1.e9
         outputs['K'][num_dofs + arange, index + arange] = 1.e9
+
+        if surface['name'] == 'wing':
+            wingbox_loc = -2.8
+            dist = nodes[:,1] - wingbox_loc
+            diff = np.abs(dist)
+            idx = diff.argmin()
+
+            index = 6 * idx
+            num_dofs = 6 * ny + 4 # why is it +4?!
+            arange = 2
+            outputs['K'][index + arange, num_dofs + arange] = 1.e9
+            outputs['K'][num_dofs + arange, index + arange] = 1.e9

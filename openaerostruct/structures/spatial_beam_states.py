@@ -17,7 +17,11 @@ class SpatialBeamStates(Group):
 
         ny = surface['mesh'].shape[1]
 
-        size = int(6 * ny + 6)
+        self.more_dof = 0
+        if surface['name'] == 'wing':
+            self.more_dof = 1
+
+        size = int(6 * ny + 6 + self.more_dof)
         wingbox_promotes = []
         if surface['struct_weight_relief']:
             self.add_subsystem('struct_weight_loads',

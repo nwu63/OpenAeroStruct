@@ -35,7 +35,11 @@ class Disp(ExplicitComponent):
 
         self.ny = ny = surface['mesh'].shape[1]
 
-        self.add_input('disp_aug', val=np.zeros(((self.ny+1)*6)), units='m')
+        self.more_dof = 0
+        if surface['name'] == 'wing':
+            self.more_dof = 1
+
+        self.add_input('disp_aug', val=np.zeros(((self.ny+1)*6+self.more_dof)), units='m')
         self.add_output('disp', val=np.zeros((self.ny, 6)), units='m')
 
         n = self.ny * 6
@@ -46,4 +50,4 @@ class Disp(ExplicitComponent):
     def compute(self, inputs, outputs):
         # Obtain the relevant portions of disp_aug and store the reshaped
         # displacements in disp
-        outputs['disp'] = inputs['disp_aug'][:-6].reshape((-1, 6))
+        outputs['disp'] = inputs['disp_aug'][:(-6-self.more_dof)].reshape((-1, 6))

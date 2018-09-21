@@ -31,11 +31,15 @@ class CreateRHS(ExplicitComponent):
 
         self.ny = ny = surface['mesh'].shape[1]
 
+        self.more_dof = 0
+        if surface['name'] == 'wing':
+            self.more_dof = 1
+
         self.add_input('total_loads', val=np.zeros((self.ny, 6)), units='N')
-        self.add_output('forces', val=np.ones(((self.ny+1)*6)), units='N')
+        self.add_output('forces', val=np.ones(((self.ny+1)*6+self.more_dof)), units='N')
 
         n = self.ny * 6
-        forces_loads = np.zeros((n + 6, n))
+        forces_loads = np.zeros((n + 6 + self.more_dof, n))
         forces_loads[:n, :n] = np.eye((n))
 
         #self.declare_partials('forces', 'total_loads', val=forces_loads)
